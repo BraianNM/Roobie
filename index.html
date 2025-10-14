@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROOBIE - Asistencia Virtual y Gestión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Madelyn&family=Aboreto&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3CB371;
+            --primary-dark: #2E8B57;
+            --primary-light: #7FCF7F;
+            --background-color: #FAF0E6;
+            --title-color: #003366;
+            --text-color: #6E6E6E;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--background-color);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 32px;
+            margin-left: 10px;
+            font-family: 'Madelyn', cursive;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-family: 'Madelyn', cursive;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .whatsapp-link {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .whatsapp-link:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--primary-color);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            font-family: 'Aboreto', cursive;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--medium-gray);
+            transition: background-color 0.3s;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-family: 'Aboreto', cursive;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--text-color);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 5%;
+            background-color: var(--background-color);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--title-color);
+            margin-bottom: 15px;
+            font-family: 'Aboreto', cursive;
+        }
+        
+        .section-title p {
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            height: 150px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 50px;
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 15px;
+            color: var(--title-color);
+            font-family: 'Aboreto', cursive;
+        }
+        
+        /* Virtual Assistance Section */
+        .virtual-assistance {
+            padding: 80px 5%;
+            background-color: white;
+        }
+        
+        .va-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .va-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .va-content h2 {
+            font-size: 32px;
+            color: var(--title-color);
+            margin-bottom: 20px;
+            font-family: 'Aboreto', cursive;
+        }
+        
+        .va-content p {
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        .va-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .advantages {
+            margin-top: 40px;
+            background-color: var(--background-color);
+            padding: 30px;
+            border-radius: 8px;
+        }
+        
+        .advantages h3 {
+            color: var(--title-color);
+            margin-bottom: 15px;
+            font-family: 'Aboreto', cursive;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-family: 'Aboreto', cursive;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        /* Robbie Character */
+        .robbie-character {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            z-index: 999;
+            transition: transform 0.5s ease-in-out;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .robbie-character img {
+            max-width: 80px;
+            max-height: 80px;
+        }
+        
+        .robbie-character p {
+            font-size: 12px;
+            margin-top: 5px;
+            color: var(--text-color);
+        }
+        
+        .robbie-1 {
+            top: 20%;
+            left: 5%;
+        }
+        
+        .robbie-2 {
+            top: 60%;
+            right: 5%;
+        }
+        
+        .robbie-3 {
+            bottom: 20%;
+            left: 10%;
+        }
+        
+        .robbie-4 {
+            top: 30%;
+            right: 15%;
+        }
+        
+        /* AFIP Section */
+        .afip-section {
+            padding: 60px 5%;
+            background-color: var(--background-color);
+            text-align: center;
+        }
+        
+        .afip-logos {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .afip-logo {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            min-width: 200px;
+        }
+        
+        .afip-logo h4 {
+            color: var(--title-color);
+            margin-bottom: 10px;
+            font-family: 'Aboreto', cursive;
+        }
+        
+        /* Review Section */
+        .review-section {
+            padding: 60px 5%;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .review-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .review-content h2 {
+            color: var(--title-color);
+            margin-bottom: 20px;
+            font-family: 'Aboreto', cursive;
+        }
+        
+        .review-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        /* Help Section */
+        .help-section {
+            padding: 60px 5%;
+            background-color: var(--background-color);
+            text-align: center;
+        }
+        
+        .help-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .help-content h2 {
+            color: var(--title-color);
+            margin-bottom: 20px;
+            font-family: 'Aboreto', cursive;
+        }
+        
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 5%;
+            }
+            
+            .nav-container {
+                display: none;
+            }
+            
+            .nav-container.active {
+                display: block;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                display: none;
+            }
+            
+            .nav-item.active .dropdown-menu {
+                display: block;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .robbie-character {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Robbie Characters -->
+    <div class="robbie-character robbie-1">
+        <div>AFIP</div>
+        <p>Te ayudo con tus trámites</p>
+    </div>
+    
+    <div class="robbie-character robbie-2">
+        <div>¿Necesitas ayuda?</div>
+        <p>¡Estoy para ayudarte!</p>
+    </div>
+    
+    <div class="robbie-character robbie-3">
+        <div>Déjanos tu reseña</div>
+        <p>Tu opinión es importante</p>
+    </div>
+    
+    <div class="robbie-character robbie-4">
+        <div>COMPÁRTENOS</div>
+        <p>Recomienda nuestros contactos</p>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <div class="logo-icon">R</div>
+                <h1>ROOBIE</h1>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>robbie.asistente@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📞</span>
+                    <span>+54 9 264 560-1518</span>
+                </div>
+                <a href="https://wa.me/+5492645601518" class="whatsapp-link" target="_blank">
+                    <span>💬</span>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+        <nav>
+            <div class="nav-container" id="navContainer">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Gestión de Monotributo</a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">Altas - Bajas</a>
+                            <a href="#" class="dropdown-item">Modificación de categoría</a>
+                            <a href="#" class="dropdown-item">Planes de pago</a>
+                            <a href="#" class="dropdown-item">Constancias</a>
+                            <a href="#" class="dropdown-item">Gestión de pagos</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Gestión de Ingresos Brutos</a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">Altas - Bajas</a>
+                            <a href="#" class="dropdown-item">Modificación de categoría</a>
+                            <a href="#" class="dropdown-item">Planes de pago</a>
+                            <a href="#" class="dropdown-item">Constancia</a>
+                            <a href="#" class="dropdown-item">Gestión de pagos</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Sociedades</a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">Inscripción</a>
+                            <a href="#" class="dropdown-item">Declaración Jurada</a>
+                            <a href="#" class="dropdown-item">IVA</a>
+                            <a href="#" class="dropdown-item">Impuesto a los Bienes Personales</a>
+                            <a href="#" class="dropdown-item">Impuestos a las Ganancias</a>
+                            <a href="#" class="dropdown-item">F931</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Liquidación de Sueldos</a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">Liquidación de Sueldos</a>
+                            <a href="#" class="dropdown-item">Convenio UOCRA</a>
+                            <a href="#" class="dropdown-item">Convenio Comercio</a>
+                            <a href="#" class="dropdown-item">Convenio Minería</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Asistencia Virtual</a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">Gestión de Agenda</a>
+                            <a href="#" class="dropdown-item">Gestión de Correo</a>
+                            <a href="#" class="dropdown-item">Contabilidad y facturación</a>
+                            <a href="#" class="dropdown-item">Gestión de base de datos</a>
+                            <a href="#" class="dropdown-item">Comunicación con proveedores</a>
+                            <a href="#" class="dropdown-item">Mantenimiento de plataformas digitales</a>
+                            <a href="#" class="dropdown-item">Soporte de proyecto</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Soluciones integrales para tu negocio</h2>
+        <p>ROOBIE te ofrece servicios de gestión administrativa, contable y asistencia virtual para optimizar tus procesos y potenciar tu crecimiento.</p>
+        <div class="hero-buttons">
+            <a href="#services" class="btn btn-primary">Nuestros Servicios</a>
+            <a href="https://wa.me/+5492645601518" class="btn btn-secondary" target="_blank">Contactar por WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- AFIP Section -->
+    <section class="afip-section">
+        <div class="section-title">
+            <h2>Trámites AFIP</h2>
+            <p>Te ayudamos con todos tus trámites ante la AFIP de manera rápida y segura</p>
+        </div>
+        <div class="afip-logos">
+            <div class="afip-logo">
+                <h4>AFIP</h4>
+                <p>Gestión de Monotributo e Impuestos</p>
+            </div>
+            <div class="afip-logo">
+                <h4>ARBA</h4>
+                <p>Gestión de Ingresos Brutos</p>
+            </div>
+            <div class="afip-logo">
+                <h4>AGIP</h4>
+                <p>Trámites para la Ciudad de Buenos Aires</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-title">
+            <h2>Nuestros Servicios</h2>
+            <p>Ofrecemos una amplia gama de servicios para satisfacer todas las necesidades de tu empresa</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <div class="service-content">
+                    <h3>Gestión de Monotributo</h3>
+                    <p>Te ayudamos con todas las gestiones relacionadas con el monotributo: altas, bajas, modificaciones y más.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <div class="service-content">
+                    <h3>Gestión de Ingresos Brutos</h3>
+                    <p>Gestión completa de ingresos brutos para que te concentres en tu negocio.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <div class="service-content">
+                    <h3>Sociedades</h3>
+                    <p>Asesoramiento integral para la constitución y gestión de sociedades.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👥</div>
+                <div class="service-content">
+                    <h3>Liquidación de Sueldos</h3>
+                    <p>Liquidación de sueldos y jornales para diferentes convenios laborales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Section -->
+    <section class="review-section">
+        <div class="review-content">
+            <h2>¡Tu opinión importa!</h2>
+            <p>Déjanos tu reseña y comparte tu experiencia con ROOBIE. Tu feedback nos ayuda a mejorar continuamente.</p>
+            <div class="review-buttons">
+                <a href="#" class="btn btn-primary">Dejar Reseña</a>
+                <a href="#" class="btn btn-secondary">Compartir Contacto</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Virtual Assistance Section -->
+    <section class="virtual-assistance">
+        <div class="va-container">
+            <div class="va-content">
+                <h2>Asistencia Virtual</h2>
+                <p>Nuestro servicio de asistencia virtual te permite delegar tareas administrativas y operativas, optimizando los recursos de tu empresa.</p>
+                <p>Ofrecemos una amplia gama de servicios virtuales adaptados a las necesidades específicas de tu negocio.</p>
+                
+                <div class="advantages">
+                    <h3>VENTAJAS DE LA ASISTENCIA VIRTUAL</h3>
+                    <p>Las ventajas de la asistencia virtual incluyen la eficiencia y la reducción de costos al automatizar tareas y eliminar gastos de oficina, la escalabilidad y flexibilidad para adaptar la ayuda a las necesidades cambiantes, y el aumento de la productividad al permitir que los equipos se enfoquen en tareas estratégicas. Además, mejora la experiencia del cliente al ofrecer atención continua y reduce la carga de trabajo del personal.</p>
+                </div>
+                
+                <a href="https://wa.me/+5492645601518" class="btn btn-primary" target="_blank" style="margin-top: 20px; display: inline-block;">
+                    Consultar por Asistencia Virtual
+                </a>
+            </div>
+            <div class="va-image">
+                Asistencia Virtual ROOBIE
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Section -->
+    <section class="help-section">
+        <div class="help-content">
+            <h2>¿No encuentras el trámite que necesitas?</h2>
+            <p>¡Estoy para ayudarte! Contáctanos y te asesoraremos sobre el trámite que necesitas realizar.</p>
+            <a href="https://wa.me/+5492645601518" class="btn btn-primary" target="_blank" style="margin-top: 20px; display: inline-block;">
+                Solicitar Ayuda
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>ROOBIE</h3>
+                <p>Soluciones integrales para la gestión de tu negocio. Asistencia virtual y servicios contables.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Gestión de Monotributo</a></li>
+                    <li><a href="#">Gestión de Ingresos Brutos</a></li>
+                    <li><a href="#">Sociedades</a></li>
+                    <li><a href="#">Liquidación de Sueldos</a></li>
+                    <li><a href="#">Asistencia Virtual</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:robbie.asistente@gmail.com">robbie.asistente@gmail.com</a></li>
+                    <li><a href="tel:+5492645601518">+54 9 264 560-1518</a></li>
+                    <li><a href="https://wa.me/+5492645601518" target="_blank">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 ROOBIE. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('navContainer').classList.toggle('active');
+        });
+        
+        // Mobile dropdown functionality
+        if (window.innerWidth <= 768) {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('nav-link')) {
+                        e.preventDefault();
+                        this.classList.toggle('active');
+                    }
+                });
+            });
+        }
+        
+        // Robbie character animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const robbies = document.querySelectorAll('.robbie-character');
+            
+            // Make Robbie characters move slightly on mouse move
+            document.addEventListener('mousemove', function(e) {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                robbies.forEach((robbie, index) => {
+                    const moveX = (mouseX - 0.5) * 20;
+                    const moveY = (mouseY - 0.5) * 20;
+                    
+                    robbie.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+            });
+            
+            // Make Robbie characters appear/disappear randomly
+            setInterval(function() {
+                robbies.forEach(robbie => {
+                    if (Math.random() > 0.7) {
+                        robbie.style.opacity = '0.8';
+                    } else {
+                        robbie.style.opacity = '1';
+                    }
+                });
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
