@@ -4,22 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROBBIE - Asistencia Virtual y Gestión</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
-        /* Fuentes personalizadas */
-        @font-face {
-            font-family: 'Madelaine';
-            src: url('https://fonts.cdnfonts.com/s/84925/MADELEINE.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-        
-        @font-face {
-            font-family: 'Absortile';
-            src: url('https://fonts.cdnfonts.com/s/84925/Absorrilte.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+        /* Eliminamos las @font-face antiguas que usaban URLs de terceros */
         
         :root {
             --primary-color: #3CB371;
@@ -73,11 +63,12 @@
             align-items: center;
         }
         
+        /* Aplicamos 'Great Vibes' para el nombre "ROBBIE" y la inicial del logo */
         .logo h1 {
             color: var(--primary-color);
             font-size: 32px;
             margin-left: 10px;
-            font-family: 'Madelaine', cursive;
+            font-family: 'Great Vibes', cursive; /* FUENTE 1: Robbie */
         }
         
         .logo-icon {
@@ -90,7 +81,7 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-family: 'Madelaine', cursive;
+            font-family: 'Great Vibes', cursive; /* FUENTE 1: Robbie */
         }
         
         .contact-info {
@@ -139,6 +130,7 @@
             position: relative;
         }
         
+        /* La navegación no requiere un estilo tan rudo, mantenemos Montserrat o la fuente Display para un toque corporativo */
         .nav-link {
             display: block;
             padding: 15px 20px;
@@ -146,7 +138,8 @@
             text-decoration: none;
             font-weight: 500;
             transition: background-color 0.3s;
-            font-family: 'Absortile', cursive;
+            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
+            font-size: 1.2em;
         }
         
         .nav-link:hover {
@@ -167,7 +160,7 @@
         .hero h2 {
             font-size: 42px;
             margin-bottom: 20px;
-            font-family: 'Absortile', cursive;
+            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo para titular de impacto */
         }
         
         .hero p {
@@ -237,7 +230,7 @@
             font-size: 32px;
             color: var(--title-color);
             margin-bottom: 15px;
-            font-family: 'Absortile', cursive;
+            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
         }
         
         .section-title p {
@@ -259,6 +252,7 @@
             border: 1px solid var(--medium-gray);
         }
         
+        /* Aplicamos 'Bebas Neue' al menú desplegable principal */
         .accordion-header {
             background-color: white;
             color: var(--title-color);
@@ -267,8 +261,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-family: 'Absortile', cursive;
-            font-size: 18px;
+            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
+            font-size: 1.4em; /* Aumentamos un poco el tamaño por el estilo de la fuente */
         }
         
         .accordion-header:hover {
@@ -340,7 +334,7 @@
             font-size: 32px;
             color: var(--title-color);
             margin-bottom: 20px;
-            font-family: 'Absortile', cursive;
+            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
         }
         
         .va-content p {
@@ -376,7 +370,7 @@
         .advantages h3 {
             color: var(--title-color);
             margin-bottom: 15px;
-            font-family: 'Absortile', cursive;
+            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
         }
         
         /* Footer */
@@ -397,7 +391,7 @@
             color: white;
             margin-bottom: 20px;
             font-size: 18px;
-            font-family: 'Absortile', cursive;
+            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
         }
         
         .footer-links {
@@ -508,7 +502,7 @@
         .testimonial-form h3 {
             color: var(--title-color);
             margin-bottom: 20px;
-            font-family: 'Absortile', cursive;
+            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
         }
         
         .form-group {
@@ -638,7 +632,7 @@
         .login-form h3 {
             margin-bottom: 20px;
             color: var(--title-color);
-            font-family: 'Absortile', cursive;
+            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
         }
         
         @media (max-width: 768px) {
@@ -693,7 +687,6 @@
     </style>
 </head>
 <body>
-    <!-- Robbie Characters -->
     <div class="robbie-character robbie-1">
         <img src="https://i.ibb.co/Z6tMZMRF/IMG-20251014-WA0025.jpg" alt="Robbie">
         <p>Te ayudo con tus trámites</p>
@@ -714,7 +707,6 @@
         <p>Recomienda nuestros contactos</p>
     </div>
 
-    <!-- Header -->
     <header id="mainHeader">
         <div class="header-top">
             <div class="logo">
@@ -757,7 +749,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <h2>SOLUCIONES INTEGRALES PARA TU NEGOCIO</h2>
         <p>ROBBIE te ofrece servicios de gestión administrativa, contable y asistencia virtual para optimizar tus procesos y potenciar tu crecimiento.</p>
@@ -767,14 +758,12 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section class="services" id="services">
         <div class="section-title">
             <h2>Nuestros Servicios</h2>
             <p>Ofrecemos una amplia gama de servicios para satisfacer todas las necesidades de tu empresa</p>
         </div>
         <div class="accordion-container">
-            <!-- Gestión de Monotributo -->
             <div class="accordion-item">
                 <div class="accordion-header">
                     <span>Gestión de Monotributo</span>
@@ -791,7 +780,6 @@
                 </div>
             </div>
             
-            <!-- Gestión de Ingresos Brutos -->
             <div class="accordion-item">
                 <div class="accordion-header">
                     <span>Gestión de Ingresos Brutos</span>
@@ -808,7 +796,6 @@
                 </div>
             </div>
             
-            <!-- Sociedades -->
             <div class="accordion-item">
                 <div class="accordion-header">
                     <span>Sociedades</span>
@@ -826,7 +813,6 @@
                 </div>
             </div>
             
-            <!-- Liquidación de Sueldos -->
             <div class="accordion-item">
                 <div class="accordion-header">
                     <span>Liquidación de Sueldos</span>
@@ -842,7 +828,6 @@
                 </div>
             </div>
             
-            <!-- Asistencia Virtual -->
             <div class="accordion-item">
                 <div class="accordion-header">
                     <span>Asistencia Virtual</span>
@@ -863,7 +848,6 @@
         </div>
     </section>
 
-    <!-- Virtual Assistance Section -->
     <section class="virtual-assistance" id="virtual-assistance">
         <div class="va-container">
             <div class="va-content">
@@ -886,7 +870,6 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
         <div class="section-title">
             <h2>Nuestros Clientes Recomiendan ROBBIE</h2>
@@ -910,7 +893,6 @@
             </div>
             
             <div class="testimonials-grid" id="testimonialsGrid">
-                <!-- Testimonios existentes -->
                 <div class="testimonial-card">
                     <button class="delete-btn" onclick="deleteTestimonial(this)">✕</button>
                     <div class="testimonial-header">
@@ -947,7 +929,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-column">
@@ -978,7 +959,6 @@
         </div>
     </footer>
 
-    <!-- Admin Panel -->
     <div class="admin-panel">
         <button class="admin-toggle" onclick="toggleAdminLogin()">⚙️</button>
     </div>
