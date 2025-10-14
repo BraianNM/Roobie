@@ -29,15 +29,22 @@
             line-height: 1.6;
             background-color: var(--background-color);
             font-family: 'Montserrat', sans-serif;
+            padding-top: 140px; /* Espacio para el header fijo */
         }
         
         /* Header */
         header {
             background-color: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
+            position: fixed;
             top: 0;
+            width: 100%;
             z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        
+        header.hidden {
+            transform: translateY(-100%);
         }
         
         .header-top {
@@ -202,6 +209,9 @@
             text-decoration: none;
             font-weight: bold;
             transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .btn-primary {
@@ -248,42 +258,74 @@
             margin: 0 auto;
         }
         
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .accordion-container {
+            max-width: 1000px;
+            margin: 0 auto;
         }
         
-        .service-card {
-            background-color: white;
+        .accordion-item {
+            margin-bottom: 15px;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .accordion-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Aboreto', cursive;
+            font-size: 18px;
+        }
+        
+        .accordion-header:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .accordion-icon {
             transition: transform 0.3s;
         }
         
-        .service-card:hover {
-            transform: translateY(-5px);
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
         }
         
-        .service-icon {
-            height: 150px;
-            background-color: var(--primary-color);
+        .accordion-content {
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+        }
+        
+        .accordion-list {
+            padding: 20px;
+            list-style: none;
+        }
+        
+        .accordion-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--medium-gray);
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 50px;
         }
         
-        .service-content {
-            padding: 25px;
+        .accordion-list li:last-child {
+            border-bottom: none;
         }
         
-        .service-content h3 {
-            margin-bottom: 15px;
-            color: var(--title-color);
-            font-family: 'Aboreto', cursive;
+        .accordion-list li:before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 10px;
         }
         
         /* Virtual Assistance Section */
@@ -423,6 +465,7 @@
         .robbie-character img {
             max-width: 80px;
             max-height: 80px;
+            border-radius: 50%;
         }
         
         .robbie-character p {
@@ -524,7 +567,97 @@
             font-family: 'Aboreto', cursive;
         }
         
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 5%;
+            background-color: var(--background-color);
+        }
+        
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 50px;
+        }
+        
+        .testimonial-form h3 {
+            color: var(--title-color);
+            margin-bottom: 20px;
+            font-family: 'Aboreto', cursive;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--title-color);
+        }
+        
+        .testimonial-text {
+            color: var(--text-color);
+            font-style: italic;
+        }
+        
         @media (max-width: 768px) {
+            body {
+                padding-top: 180px;
+            }
+            
             .header-top {
                 flex-direction: column;
                 gap: 15px;
@@ -587,27 +720,27 @@
 <body>
     <!-- Robbie Characters -->
     <div class="robbie-character robbie-1">
-        <div>AFIP</div>
+        <img src="https://i.ibb.co/Z6tMZMRF/IMG-20251014-WA0025.jpg" alt="Robbie">
         <p>Te ayudo con tus trámites</p>
     </div>
     
     <div class="robbie-character robbie-2">
-        <div>¿Necesitas ayuda?</div>
+        <img src="https://i.ibb.co/Z1fJhzDs/IMG-20251014-WA0023.jpg" alt="Robbie">
         <p>¡Estoy para ayudarte!</p>
     </div>
     
     <div class="robbie-character robbie-3">
-        <div>Déjanos tu reseña</div>
+        <img src="https://i.ibb.co/k20nP9nB/IMG-20251014-WA0024.jpg" alt="Robbie">
         <p>Tu opinión es importante</p>
     </div>
     
     <div class="robbie-character robbie-4">
-        <div>COMPÁRTENOS</div>
+        <img src="https://i.ibb.co/WNfrmwMs/IMG-20251014-WA0021.jpg" alt="Robbie">
         <p>Recomienda nuestros contactos</p>
     </div>
 
     <!-- Header -->
-    <header>
+    <header id="mainHeader">
         <div class="header-top">
             <div class="logo">
                 <div class="logo-icon">R</div>
@@ -633,56 +766,16 @@
             <div class="nav-container" id="navContainer">
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Gestión de Monotributo</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Altas - Bajas</a>
-                            <a href="#" class="dropdown-item">Modificación de categoría</a>
-                            <a href="#" class="dropdown-item">Planes de pago</a>
-                            <a href="#" class="dropdown-item">Constancias</a>
-                            <a href="#" class="dropdown-item">Gestión de pagos</a>
-                        </div>
+                        <a href="#services" class="nav-link">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Gestión de Ingresos Brutos</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Altas - Bajas</a>
-                            <a href="#" class="dropdown-item">Modificación de categoría</a>
-                            <a href="#" class="dropdown-item">Planes de pago</a>
-                            <a href="#" class="dropdown-item">Constancia</a>
-                            <a href="#" class="dropdown-item">Gestión de pagos</a>
-                        </div>
+                        <a href="#virtual-assistance" class="nav-link">Asistencia Virtual</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Sociedades</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Inscripción</a>
-                            <a href="#" class="dropdown-item">Declaración Jurada</a>
-                            <a href="#" class="dropdown-item">IVA</a>
-                            <a href="#" class="dropdown-item">Impuesto a los Bienes Personales</a>
-                            <a href="#" class="dropdown-item">Impuestos a las Ganancias</a>
-                            <a href="#" class="dropdown-item">F931</a>
-                        </div>
+                        <a href="#testimonials" class="nav-link">Testimonios</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Liquidación de Sueldos</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Liquidación de Sueldos</a>
-                            <a href="#" class="dropdown-item">Convenio UOCRA</a>
-                            <a href="#" class="dropdown-item">Convenio Comercio</a>
-                            <a href="#" class="dropdown-item">Convenio Minería</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Asistencia Virtual</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Gestión de Agenda</a>
-                            <a href="#" class="dropdown-item">Gestión de Correo</a>
-                            <a href="#" class="dropdown-item">Contabilidad y facturación</a>
-                            <a href="#" class="dropdown-item">Gestión de base de datos</a>
-                            <a href="#" class="dropdown-item">Comunicación con proveedores</a>
-                            <a href="#" class="dropdown-item">Mantenimiento de plataformas digitales</a>
-                            <a href="#" class="dropdown-item">Soporte de proyecto</a>
-                        </div>
+                        <a href="https://wa.me/+5492645601518" class="nav-link" target="_blank">Contacto</a>
                     </li>
                 </ul>
             </div>
@@ -691,33 +784,11 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h2>Soluciones integrales para tu negocio</h2>
+        <h2>SOLUCIONES INTEGRALES PARA TU NEGOCIO</h2>
         <p>ROOBIE te ofrece servicios de gestión administrativa, contable y asistencia virtual para optimizar tus procesos y potenciar tu crecimiento.</p>
         <div class="hero-buttons">
             <a href="#services" class="btn btn-primary">Nuestros Servicios</a>
             <a href="https://wa.me/+5492645601518" class="btn btn-secondary" target="_blank">Contactar por WhatsApp</a>
-        </div>
-    </section>
-
-    <!-- AFIP Section -->
-    <section class="afip-section">
-        <div class="section-title">
-            <h2>Trámites AFIP</h2>
-            <p>Te ayudamos con todos tus trámites ante la AFIP de manera rápida y segura</p>
-        </div>
-        <div class="afip-logos">
-            <div class="afip-logo">
-                <h4>AFIP</h4>
-                <p>Gestión de Monotributo e Impuestos</p>
-            </div>
-            <div class="afip-logo">
-                <h4>ARBA</h4>
-                <p>Gestión de Ingresos Brutos</p>
-            </div>
-            <div class="afip-logo">
-                <h4>AGIP</h4>
-                <p>Trámites para la Ciudad de Buenos Aires</p>
-            </div>
         </div>
     </section>
 
@@ -727,52 +798,98 @@
             <h2>Nuestros Servicios</h2>
             <p>Ofrecemos una amplia gama de servicios para satisfacer todas las necesidades de tu empresa</p>
         </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">📊</div>
-                <div class="service-content">
-                    <h3>Gestión de Monotributo</h3>
-                    <p>Te ayudamos con todas las gestiones relacionadas con el monotributo: altas, bajas, modificaciones y más.</p>
+        <div class="accordion-container">
+            <!-- Gestión de Monotributo -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Gestión de Monotributo</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <ul class="accordion-list">
+                        <li>Altas - Bajas</li>
+                        <li>Modificación de categoría</li>
+                        <li>Planes de pago</li>
+                        <li>Constancias</li>
+                        <li>Gestión de pagos</li>
+                    </ul>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">💰</div>
-                <div class="service-content">
-                    <h3>Gestión de Ingresos Brutos</h3>
-                    <p>Gestión completa de ingresos brutos para que te concentres en tu negocio.</p>
+            
+            <!-- Gestión de Ingresos Brutos -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Gestión de Ingresos Brutos</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <ul class="accordion-list">
+                        <li>Altas - Bajas</li>
+                        <li>Modificación de categoría</li>
+                        <li>Planes de pago</li>
+                        <li>Constancia</li>
+                        <li>Gestión de pagos</li>
+                    </ul>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">🏢</div>
-                <div class="service-content">
-                    <h3>Sociedades</h3>
-                    <p>Asesoramiento integral para la constitución y gestión de sociedades.</p>
+            
+            <!-- Sociedades -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Sociedades</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <ul class="accordion-list">
+                        <li>Inscripción</li>
+                        <li>Declaración Jurada</li>
+                        <li>IVA</li>
+                        <li>Impuesto a los Bienes Personales</li>
+                        <li>Impuestos a las Ganancias</li>
+                        <li>F931</li>
+                    </ul>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">👥</div>
-                <div class="service-content">
-                    <h3>Liquidación de Sueldos</h3>
-                    <p>Liquidación de sueldos y jornales para diferentes convenios laborales.</p>
+            
+            <!-- Liquidación de Sueldos -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Liquidación de Sueldos</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <ul class="accordion-list">
+                        <li>Liquidación de Sueldos</li>
+                        <li>Convenio UOCRA</li>
+                        <li>Convenio Comercio</li>
+                        <li>Convenio Minería</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Review Section -->
-    <section class="review-section">
-        <div class="review-content">
-            <h2>¡Tu opinión importa!</h2>
-            <p>Déjanos tu reseña y comparte tu experiencia con ROOBIE. Tu feedback nos ayuda a mejorar continuamente.</p>
-            <div class="review-buttons">
-                <a href="#" class="btn btn-primary">Dejar Reseña</a>
-                <a href="#" class="btn btn-secondary">Compartir Contacto</a>
+            
+            <!-- Asistencia Virtual -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Asistencia Virtual</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <ul class="accordion-list">
+                        <li>Gestión de Agenda</li>
+                        <li>Gestión de Correo</li>
+                        <li>Contabilidad y facturación</li>
+                        <li>Gestión de base de datos</li>
+                        <li>Comunicación con proveedores</li>
+                        <li>Mantenimiento de plataformas digitales</li>
+                        <li>Soporte de proyecto</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Virtual Assistance Section -->
-    <section class="virtual-assistance">
+    <section class="virtual-assistance" id="virtual-assistance">
         <div class="va-container">
             <div class="va-content">
                 <h2>Asistencia Virtual</h2>
@@ -789,19 +906,66 @@
                 </a>
             </div>
             <div class="va-image">
-                Asistencia Virtual ROOBIE
+                <img src="https://i.ibb.co/Z1fJhzDs/IMG-20251014-WA0023.jpg" alt="Robbie Asistente Virtual" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
         </div>
     </section>
 
-    <!-- Help Section -->
-    <section class="help-section">
-        <div class="help-content">
-            <h2>¿No encuentras el trámite que necesitas?</h2>
-            <p>¡Estoy para ayudarte! Contáctanos y te asesoraremos sobre el trámite que necesitas realizar.</p>
-            <a href="https://wa.me/+5492645601518" class="btn btn-primary" target="_blank" style="margin-top: 20px; display: inline-block;">
-                Solicitar Ayuda
-            </a>
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2>Nuestros Cleros Recomiendan ROOBIE</h2>
+            <p>Descubre lo que nuestros clientes dicen sobre nuestros servicios</p>
+        </div>
+        
+        <div class="testimonials-container">
+            <div class="testimonial-form">
+                <h3>¿Te gustó nuestro servicio? ¡Déjanos tu comentario!</h3>
+                <form id="testimonialForm">
+                    <div class="form-group">
+                        <label for="clientName">Tu nombre:</label>
+                        <input type="text" id="clientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientTestimonial">Tu mensaje:</label>
+                        <textarea id="clientTestimonial" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Testimonio</button>
+                </form>
+            </div>
+            
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <!-- Testimonios existentes -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">M</div>
+                        <div class="testimonial-author">María González</div>
+                    </div>
+                    <div class="testimonial-text">
+                        "ROOBIE me ayudó con toda la gestión de mi monotributo. Muy profesionales y eficientes. ¡Los recomiendo!"
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">C</div>
+                        <div class="testimonial-author">Carlos López</div>
+                    </div>
+                    <div class="testimonial-text">
+                        "La asistencia virtual ha sido un cambio radical para mi negocio. Ahora puedo enfocarme en lo que realmente importa."
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">A</div>
+                        <div class="testimonial-author">Ana Martínez</div>
+                    </div>
+                    <div class="testimonial-text">
+                        "Excelente servicio de liquidación de sueldos. Muy detallados y siempre disponibles para consultas."
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -815,11 +979,11 @@
             <div class="footer-column">
                 <h3>Servicios</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Gestión de Monotributo</a></li>
-                    <li><a href="#">Gestión de Ingresos Brutos</a></li>
-                    <li><a href="#">Sociedades</a></li>
-                    <li><a href="#">Liquidación de Sueldos</a></li>
-                    <li><a href="#">Asistencia Virtual</a></li>
+                    <li><a href="#services">Gestión de Monotributo</a></li>
+                    <li><a href="#services">Gestión de Ingresos Brutos</a></li>
+                    <li><a href="#services">Sociedades</a></li>
+                    <li><a href="#services">Liquidación de Sueldos</a></li>
+                    <li><a href="#virtual-assistance">Asistencia Virtual</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -882,6 +1046,80 @@
                     }
                 });
             }, 3000);
+        });
+        
+        // Accordion functionality
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            
+            header.addEventListener('click', () => {
+                // Close all other accordion items
+                accordionItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Hide header on scroll down, show on scroll up
+        let lastScrollTop = 0;
+        const header = document.getElementById('mainHeader');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.classList.add('hidden');
+            } else {
+                // Scrolling up
+                header.classList.remove('hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Testimonial form functionality
+        const testimonialForm = document.getElementById('testimonialForm');
+        const testimonialsGrid = document.getElementById('testimonialsGrid');
+        
+        testimonialForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('clientName').value;
+            const testimonial = document.getElementById('clientTestimonial').value;
+            
+            if (name && testimonial) {
+                // Create new testimonial card
+                const testimonialCard = document.createElement('div');
+                testimonialCard.className = 'testimonial-card';
+                
+                // Get first letter for avatar
+                const firstLetter = name.charAt(0).toUpperCase();
+                
+                testimonialCard.innerHTML = `
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">${firstLetter}</div>
+                        <div class="testimonial-author">${name}</div>
+                    </div>
+                    <div class="testimonial-text">"${testimonial}"</div>
+                `;
+                
+                // Add to the grid (at the beginning)
+                testimonialsGrid.prepend(testimonialCard);
+                
+                // Reset form
+                testimonialForm.reset();
+                
+                // Show success message
+                alert('¡Gracias por tu testimonio! Se ha publicado correctamente.');
+            }
         });
     </script>
 </body>
