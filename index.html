@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROOBIE - Asistencia Virtual y Gestión</title>
-    <link href="https://fonts.googleapis.com/css2?family=Madelyn&family=Aboreto&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>ROBBIE - Asistencia Virtual y Gestión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'Madeleine';
+            src: url('https://fonts.cdnfonts.com/s/84925/MADELEINE.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Absorrilte';
+            src: url('https://fonts.cdnfonts.com/s/84925/Absorrilte.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
         :root {
             --primary-color: #3CB371;
             --primary-dark: #2E8B57;
@@ -16,6 +30,8 @@
             --light-gray: #f5f5f5;
             --medium-gray: #e0e0e0;
             --dark-gray: #666;
+            --section-bg: #3CB371;
+            --section-text: white;
         }
         
         * {
@@ -29,7 +45,7 @@
             line-height: 1.6;
             background-color: var(--background-color);
             font-family: 'Montserrat', sans-serif;
-            padding-top: 140px; /* Espacio para el header fijo */
+            padding-top: 140px;
         }
         
         /* Header */
@@ -64,7 +80,7 @@
             color: var(--primary-color);
             font-size: 32px;
             margin-left: 10px;
-            font-family: 'Madelyn', cursive;
+            font-family: 'Madeleine', cursive;
         }
         
         .logo-icon {
@@ -77,7 +93,7 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-family: 'Madelyn', cursive;
+            font-family: 'Madeleine', cursive;
         }
         
         .contact-info {
@@ -133,45 +149,11 @@
             text-decoration: none;
             font-weight: 500;
             transition: background-color 0.3s;
-            font-family: 'Aboreto', cursive;
+            font-family: 'Absorrilte', cursive;
         }
         
         .nav-link:hover {
             background-color: var(--primary-dark);
-        }
-        
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            min-width: 250px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s;
-            z-index: 1000;
-        }
-        
-        .nav-item:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .dropdown-item {
-            display: block;
-            padding: 12px 20px;
-            color: var(--text-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--medium-gray);
-            transition: background-color 0.3s;
-        }
-        
-        .dropdown-item:hover {
-            background-color: var(--light-gray);
-            color: var(--primary-color);
         }
         
         /* Hero Section */
@@ -188,7 +170,7 @@
         .hero h2 {
             font-size: 42px;
             margin-bottom: 20px;
-            font-family: 'Aboreto', cursive;
+            font-family: 'Absorrilte', cursive;
         }
         
         .hero p {
@@ -234,10 +216,20 @@
             color: var(--text-color);
         }
         
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        
         /* Services Section */
         .services {
             padding: 80px 5%;
-            background-color: var(--background-color);
+            background-color: var(--section-bg);
+            color: var(--section-text);
         }
         
         .section-title {
@@ -247,13 +239,13 @@
         
         .section-title h2 {
             font-size: 32px;
-            color: var(--title-color);
+            color: var(--section-text);
             margin-bottom: 15px;
-            font-family: 'Aboreto', cursive;
+            font-family: 'Absorrilte', cursive;
         }
         
         .section-title p {
-            color: var(--text-color);
+            color: var(--section-text);
             max-width: 700px;
             margin: 0 auto;
         }
@@ -271,19 +263,19 @@
         }
         
         .accordion-header {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: white;
+            color: var(--title-color);
             padding: 20px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-family: 'Aboreto', cursive;
+            font-family: 'Absorrilte', cursive;
             font-size: 18px;
         }
         
         .accordion-header:hover {
-            background-color: var(--primary-dark);
+            background-color: var(--light-gray);
         }
         
         .accordion-icon {
@@ -315,6 +307,7 @@
             border-bottom: 1px solid var(--medium-gray);
             display: flex;
             align-items: center;
+            color: var(--text-color);
         }
         
         .accordion-list li:last-child {
@@ -331,7 +324,8 @@
         /* Virtual Assistance Section */
         .virtual-assistance {
             padding: 80px 5%;
-            background-color: white;
+            background-color: var(--section-bg);
+            color: var(--section-text);
         }
         
         .va-container {
@@ -348,14 +342,14 @@
         
         .va-content h2 {
             font-size: 32px;
-            color: var(--title-color);
+            color: var(--section-text);
             margin-bottom: 20px;
-            font-family: 'Aboreto', cursive;
+            font-family: 'Absorrilte', cursive;
         }
         
         .va-content p {
             margin-bottom: 20px;
-            color: var(--text-color);
+            color: var(--section-text);
         }
         
         .va-image {
@@ -376,15 +370,15 @@
         
         .advantages {
             margin-top: 40px;
-            background-color: var(--background-color);
+            background-color: rgba(255, 255, 255, 0.2);
             padding: 30px;
             border-radius: 8px;
         }
         
         .advantages h3 {
-            color: var(--title-color);
+            color: var(--section-text);
             margin-bottom: 15px;
-            font-family: 'Aboreto', cursive;
+            font-family: 'Absorrilte', cursive;
         }
         
         /* Footer */
@@ -405,7 +399,7 @@
             color: var(--primary-color);
             margin-bottom: 20px;
             font-size: 18px;
-            font-family: 'Aboreto', cursive;
+            font-family: 'Absorrilte', cursive;
         }
         
         .footer-links {
@@ -494,79 +488,6 @@
             right: 15%;
         }
         
-        /* AFIP Section */
-        .afip-section {
-            padding: 60px 5%;
-            background-color: var(--background-color);
-            text-align: center;
-        }
-        
-        .afip-logos {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-        
-        .afip-logo {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            min-width: 200px;
-        }
-        
-        .afip-logo h4 {
-            color: var(--title-color);
-            margin-bottom: 10px;
-            font-family: 'Aboreto', cursive;
-        }
-        
-        /* Review Section */
-        .review-section {
-            padding: 60px 5%;
-            background-color: white;
-            text-align: center;
-        }
-        
-        .review-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .review-content h2 {
-            color: var(--title-color);
-            margin-bottom: 20px;
-            font-family: 'Aboreto', cursive;
-        }
-        
-        .review-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        
-        /* Help Section */
-        .help-section {
-            padding: 60px 5%;
-            background-color: var(--background-color);
-            text-align: center;
-        }
-        
-        .help-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .help-content h2 {
-            color: var(--title-color);
-            margin-bottom: 20px;
-            font-family: 'Aboreto', cursive;
-        }
-        
         /* Testimonials Section */
         .testimonials {
             padding: 80px 5%;
@@ -589,7 +510,7 @@
         .testimonial-form h3 {
             color: var(--title-color);
             margin-bottom: 20px;
-            font-family: 'Aboreto', cursive;
+            font-family: 'Absorrilte', cursive;
         }
         
         .form-group {
@@ -622,6 +543,7 @@
             padding: 25px;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
         }
         
         .testimonial-header {
@@ -651,6 +573,74 @@
         .testimonial-text {
             color: var(--text-color);
             font-style: italic;
+        }
+        
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 16px;
+            display: none;
+        }
+        
+        .admin-mode .delete-btn {
+            display: block;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .admin-toggle {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .admin-login {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            display: none;
+        }
+        
+        .admin-login.active {
+            display: flex;
+        }
+        
+        .login-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .login-form h3 {
+            margin-bottom: 20px;
+            color: var(--title-color);
+            font-family: 'Absorrilte', cursive;
         }
         
         @media (max-width: 768px) {
@@ -685,19 +675,6 @@
             
             .nav-menu {
                 flex-direction: column;
-            }
-            
-            .dropdown-menu {
-                position: static;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                box-shadow: none;
-                display: none;
-            }
-            
-            .nav-item.active .dropdown-menu {
-                display: block;
             }
             
             .hero-buttons {
@@ -744,7 +721,7 @@
         <div class="header-top">
             <div class="logo">
                 <div class="logo-icon">R</div>
-                <h1>ROOBIE</h1>
+                <h1>ROBBIE</h1>
             </div>
             <div class="contact-info">
                 <div class="contact-item">
@@ -785,7 +762,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <h2>SOLUCIONES INTEGRALES PARA TU NEGOCIO</h2>
-        <p>ROOBIE te ofrece servicios de gestión administrativa, contable y asistencia virtual para optimizar tus procesos y potenciar tu crecimiento.</p>
+        <p>ROBBIE te ofrece servicios de gestión administrativa, contable y asistencia virtual para optimizar tus procesos y potenciar tu crecimiento.</p>
         <div class="hero-buttons">
             <a href="#services" class="btn btn-primary">Nuestros Servicios</a>
             <a href="https://wa.me/+5492645601518" class="btn btn-secondary" target="_blank">Contactar por WhatsApp</a>
@@ -914,7 +891,7 @@
     <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
         <div class="section-title">
-            <h2>Nuestros Clientes Recomiendan ROOBIE</h2>
+            <h2>Nuestros Clientes Recomiendan ROBBIE</h2>
             <p>Descubre lo que nuestros clientes dicen sobre nuestros servicios</p>
         </div>
         
@@ -937,16 +914,18 @@
             <div class="testimonials-grid" id="testimonialsGrid">
                 <!-- Testimonios existentes -->
                 <div class="testimonial-card">
+                    <button class="delete-btn" onclick="deleteTestimonial(this)">✕</button>
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">M</div>
                         <div class="testimonial-author">María González</div>
                     </div>
                     <div class="testimonial-text">
-                        "ROOBIE me ayudó con toda la gestión de mi monotributo. Muy profesionales y eficientes. ¡Los recomiendo!"
+                        "ROBBIE me ayudó con toda la gestión de mi monotributo. Muy profesionales y eficientes. ¡Los recomiendo!"
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
+                    <button class="delete-btn" onclick="deleteTestimonial(this)">✕</button>
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">C</div>
                         <div class="testimonial-author">Carlos López</div>
@@ -957,6 +936,7 @@
                 </div>
                 
                 <div class="testimonial-card">
+                    <button class="delete-btn" onclick="deleteTestimonial(this)">✕</button>
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">A</div>
                         <div class="testimonial-author">Ana Martínez</div>
@@ -973,7 +953,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-column">
-                <h3>ROOBIE</h3>
+                <h3>ROBBIE</h3>
                 <p>Soluciones integrales para la gestión de tu negocio. Asistencia virtual y servicios contables.</p>
             </div>
             <div class="footer-column">
@@ -996,28 +976,36 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2023 ROOBIE. Todos los derechos reservados.</p>
+            <p>&copy; 2023 ROBBIE. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel">
+        <button class="admin-toggle" onclick="toggleAdminLogin()">⚙️</button>
+    </div>
+    
+    <div class="admin-login" id="adminLogin">
+        <div class="login-form">
+            <h3>Acceso Administrador</h3>
+            <div class="form-group">
+                <label for="adminEmail">Email:</label>
+                <input type="email" id="adminEmail" placeholder="robbie.asistente@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Contraseña:</label>
+                <input type="password" id="adminPassword" placeholder="AsistenteRobbie2025">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="loginAdmin()">Acceder</button>
+            <button type="button" class="btn btn-secondary" onclick="toggleAdminLogin()" style="margin-left: 10px;">Cancelar</button>
+        </div>
+    </div>
 
     <script>
         // Mobile menu functionality
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.getElementById('navContainer').classList.toggle('active');
         });
-        
-        // Mobile dropdown functionality
-        if (window.innerWidth <= 768) {
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    if (e.target.classList.contains('nav-link')) {
-                        e.preventDefault();
-                        this.classList.toggle('active');
-                    }
-                });
-            });
-        }
         
         // Robbie character animation
         document.addEventListener('DOMContentLoaded', function() {
@@ -1104,6 +1092,7 @@
                 const firstLetter = name.charAt(0).toUpperCase();
                 
                 testimonialCard.innerHTML = `
+                    <button class="delete-btn" onclick="deleteTestimonial(this)">✕</button>
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">${firstLetter}</div>
                         <div class="testimonial-author">${name}</div>
@@ -1121,6 +1110,35 @@
                 alert('¡Gracias por tu testimonio! Se ha publicado correctamente.');
             }
         });
+        
+        // Admin functionality
+        let isAdmin = false;
+        
+        function toggleAdminLogin() {
+            document.getElementById('adminLogin').classList.toggle('active');
+        }
+        
+        function loginAdmin() {
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (email === 'robbie.asistente@gmail.com' && password === 'AsistenteRobbie2025') {
+                isAdmin = true;
+                document.body.classList.add('admin-mode');
+                toggleAdminLogin();
+                alert('Modo administrador activado');
+            } else {
+                alert('Credenciales incorrectas');
+            }
+        }
+        
+        function deleteTestimonial(button) {
+            if (isAdmin) {
+                if (confirm('¿Estás seguro de que quieres eliminar este testimonio?')) {
+                    button.parentElement.remove();
+                }
+            }
+        }
     </script>
 </body>
 </html>
