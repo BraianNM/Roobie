@@ -661,6 +661,29 @@
             font-family: 'Absortile', cursive;
         }
         
+        /* Loading spinner */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .no-testimonials {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-color);
+        }
+        
         @media (max-width: 768px) {
             body {
                 padding-top: 160px;
@@ -925,12 +948,13 @@
                         <label for="clientTestimonial">Tu mensaje:</label>
                         <textarea id="clientTestimonial" rows="4" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar Testimonio</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span id="btnText">Enviar Testimonio</span>
+                    </button>
                 </form>
             </div>
             
             <div class="testimonials-grid" id="testimonialsGrid">
-                <!-- Los testimonios se cargarán aquí automáticamente -->
                 <div class="loading-testimonials">Cargando testimonios...</div>
             </div>
         </div>
@@ -967,67 +991,40 @@
         </div>
     </footer>
 
-    <div class="admin-panel">
-        <button class="admin-toggle" onclick="toggleAdminLogin()">⚙️</button>
-    </div>
-    
-    <div class="admin-login" id="adminLogin">
-        <div class="login-form">
-            <h3>Acceso Administrador</h3>
-            <div class="form-group">
-                <label for="adminEmail">Email:</label>
-                <input type="email" id="adminEmail" placeholder="Ingresa tu correo">
-            </div>
-            <div class="form-group">
-                <label for="adminPassword">Contraseña:</label>
-                <input type="password" id="adminPassword" placeholder="Ingresa tu contraseña">
-            </div>
-            <button type="button" class="btn btn-primary" onclick="loginAdmin()">Acceder</button>
-            <button type="button" class="btn btn-secondary" onclick="toggleAdminLogin()" style="margin-left: 10px;">Cancelar</button>
-        </div>
-    </div>
-
     <script>
         // =============================================
-        // CONFIGURACIÓN GITHUB GISTS
+        // CONFIGURACIÓN NPONINT.IO - AUTOMÁTICO
         // =============================================
         
-        // REEMPLAZA ESTO CON TU GIST ID
-        const GIST_ID = '6a419d45de951d5d82d9bf8508afc5d9'; 
-        const GIST_URL = `https://api.github.com/gists/${GIST_ID}`;
+        // 🔧 REEMPLAZA ESTA URL CON LA QUE TE DÉ NPONINT.IO
+        const NPONINT_JSON_URL = 'https://api.npoint.io/d51d5853b493dd18a345';
         
-        // Token opcional para más requests (crear en GitHub Settings > Developer settings > Personal access tokens)
-        const GITHUB_TOKEN = ''; // Opcional: 'ghp_tu_token_aqui'
-
         // =============================================
-        // FUNCIONES PARA GITHUB GISTS
+        // FUNCIONES PRINCIPALES
         // =============================================
 
-        // Función para cargar testimonios desde Gist
+        // Función para cargar testimonios automáticamente
         async function loadTestimonials() {
             try {
-                console.log('Cargando testimonios desde GitHub Gist...');
+                console.log('🔄 Cargando testimonios...');
+                const testimonialsGrid = document.getElementById('testimonialsGrid');
                 
-                const headers = {};
-                if (GITHUB_TOKEN) {
-                    headers['Authorization'] = `token ${GITHUB_TOKEN}`;
-                }
-                
-                const response = await fetch(GIST_URL, { headers });
+                const response = await fetch(NPONINT_JSON_URL);
                 
                 if (!response.ok) {
                     throw new Error(`Error HTTP: ${response.status}`);
                 }
                 
-                const gist = await response.json();
-                const testimonialsData = JSON.parse(gist.files['testimonios.json'].content);
-                const testimonials = testimonialsData.testimonios || [];
+                const testimonials = await response.json();
                 
-                console.log(`Se cargaron ${testimonials.length} testimonios`);
-                displayTestimonials(testimonials);
+                // Verificar si es un array
+                const testimonialsArray = Array.isArray(testimonials) ? testimonials : [];
+                
+                console.log(`✅ Se cargaron ${testimonialsArray.length} testimonios`);
+                displayTestimonials(testimonialsArray);
                 
             } catch (error) {
-                console.error('Error cargando testimonios:', error);
+                console.error('❌ Error cargando testimonios:', error);
                 loadFallbackTestimonials();
             }
         }
@@ -1039,7 +1036,7 @@
             if (testimonials.length === 0) {
                 testimonialsGrid.innerHTML = `
                     <div class="no-testimonials">
-                        <p>Aún no hay testimonios. ¡Sé el primero en comentar!</p>
+                        <p>🎯 Aún no hay testimonios. ¡Sé el primero en comentar!</p>
                     </div>
                 `;
                 return;
@@ -1059,44 +1056,82 @@
                         <div class="testimonial-author">${testimonial.nombre}</div>
                     </div>
                     <div class="testimonial-text">"${testimonial.testimonio}"</div>
+                    <div style="font-size: 12px; color: #888; margin-top: 10px;">
+                        ${new Date(testimonial.fecha).toLocaleDateString('es-ES')}
+                    </div>
                 `;
                 testimonialsGrid.appendChild(testimonialCard);
             });
         }
 
-        // Función para enviar testimonio (VERSIÓN SIMPLE - sin backend)
-        function submitTestimonialSimple(e) {
+        // Función para enviar testimonio AUTOMÁTICAMENTE
+        async function submitTestimonialAuto(e) {
             e.preventDefault();
             
             const name = document.getElementById('clientName').value.trim();
             const testimonial = document.getElementById('clientTestimonial').value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
             
             if (name && testimonial) {
-                // Enviar por email (solución temporal)
-                const subject = `Nuevo testimonio de ${name} - Robbie`;
-                const body = `
-Nombre: ${name}
-Testimonio: ${testimonial}
-
-Fecha: ${new Date().toLocaleDateString()}
-
----
-Por favor, agrega este testimonio manualmente al sistema GitHub Gist.
-Enviado desde el sitio web de Robbie
-                `;
+                // Mostrar loading
+                const originalText = btnText.textContent;
+                btnText.innerHTML = '<div class="loading"></div>Enviando...';
+                submitBtn.disabled = true;
                 
-                window.location.href = `mailto:robbie.asistente@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                
-                alert('¡Gracias por tu testimonio! Se ha enviado a nuestro equipo. Lo revisaremos y publicaremos pronto.');
-                document.getElementById('testimonialForm').reset();
+                try {
+                    const newTestimonial = {
+                        nombre: name,
+                        testimonio: testimonial,
+                        fecha: new Date().toISOString(),
+                        inicial: name.charAt(0).toUpperCase()
+                    };
+                    
+                    console.log('📤 Enviando testimonio:', newTestimonial);
+                    
+                    // Enviar a npoint.io - MÉTODO AUTOMÁTICO
+                    const response = await fetch(NPONINT_JSON_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(newTestimonial)
+                    });
+                    
+                    if (response.ok) {
+                        console.log('✅ Testimonio enviado exitosamente');
+                        
+                        // Mostrar mensaje de éxito
+                        alert('🎉 ¡Gracias! Tu testimonio se ha publicado automáticamente y ya es visible para todos.');
+                        
+                        // Limpiar formulario
+                        document.getElementById('testimonialForm').reset();
+                        
+                        // Recargar testimonios después de 1 segundo
+                        setTimeout(() => {
+                            loadTestimonials();
+                        }, 1000);
+                        
+                    } else {
+                        throw new Error('Error en la respuesta del servidor');
+                    }
+                    
+                } catch (error) {
+                    console.error('❌ Error enviando testimonio:', error);
+                    alert('⚠️ Error temporal al enviar. Por favor, intenta nuevamente en unos momentos.');
+                } finally {
+                    // Restaurar botón
+                    btnText.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
             } else {
-                alert('Por favor, completa todos los campos.');
+                alert('📝 Por favor, completa todos los campos.');
             }
         }
 
         // Testimonios de ejemplo por si falla la conexión
         function loadFallbackTestimonials() {
-            console.log('Cargando testimonios de respaldo...');
+            console.log('🔄 Cargando testimonios de respaldo...');
             const testimonialsGrid = document.getElementById('testimonialsGrid');
             testimonialsGrid.innerHTML = `
                 <div class="testimonial-card">
@@ -1116,16 +1151,6 @@ Enviado desde el sitio web de Robbie
                     </div>
                     <div class="testimonial-text">
                         "La asistencia virtual ha sido un cambio radical para mi negocio. Ahora puedo enfocarme en lo que realmente importa."
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">A</div>
-                        <div class="testimonial-author">Ana Martínez</div>
-                    </div>
-                    <div class="testimonial-text">
-                        "Excelente servicio de liquidación de sueldos. Muy detallados y siempre disponibles para consultas."
                     </div>
                 </div>
             `;
@@ -1171,9 +1196,9 @@ Enviado desde el sitio web de Robbie
             // Cargar testimonios al iniciar
             loadTestimonials();
             
-            // Configurar el formulario
+            // Configurar el formulario para envío AUTOMÁTICO
             const testimonialForm = document.getElementById('testimonialForm');
-            testimonialForm.addEventListener('submit', submitTestimonialSimple);
+            testimonialForm.addEventListener('submit', submitTestimonialAuto);
         });
         
         // Accordion functionality
@@ -1231,14 +1256,6 @@ Enviado desde el sitio web de Robbie
                 alert('Modo administrador activado');
             } else {
                 alert('Credenciales incorrectas');
-            }
-        }
-        
-        function deleteTestimonial(button) {
-            if (isAdmin) {
-                if (confirm('¿Estás seguro de que quieres eliminar este testimonio?')) {
-                    button.parentElement.remove();
-                }
             }
         }
     </script>
