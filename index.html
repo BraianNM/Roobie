@@ -402,7 +402,7 @@
             font-family: 'Gidole', sans-serif; 
         }
         
-        /* Testimonials Section */
+        /* Testimonials Section (Corregida) */
         .testimonials {
             padding: 80px 5%;
             background-color: var(--background-color);
@@ -447,11 +447,11 @@
             font-family: 'Montserrat', sans-serif;
         }
         
-        /* Corrección de la cuadrícula de testimonios (grid) */
+        /* Estilos clave para la cuadrícula de testimonios */
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px; /* Espacio entre tarjetas */
+            gap: 30px;
         }
         
         .testimonial-card {
@@ -479,6 +479,7 @@
             color: white;
             font-weight: bold;
             margin-right: 15px;
+            flex-shrink: 0; /* Asegura que el avatar no se encoja */
         }
         
         .testimonial-author {
@@ -998,11 +999,11 @@
             <h3>Acceso Administrador</h3>
             <div class="form-group">
                 <label for="adminEmail">Email:</label>
-                <input type="email" id="adminEmail" placeholder="robbie.asistente@gmail.com">
+                <input type="email" id="adminEmail" placeholder="Ingresa tu correo">
             </div>
             <div class="form-group">
                 <label for="adminPassword">Contraseña:</label>
-                <input type="password" id="adminPassword" placeholder="AsistenteRobbie2025">
+                <input type="password" id="adminPassword" placeholder="Ingresa tu contraseña">
             </div>
             <button type="button" class="btn btn-primary" onclick="loginAdmin()">Acceder</button>
             <button type="button" class="btn btn-secondary" onclick="toggleAdminLogin()" style="margin-left: 10px;">Cancelar</button>
@@ -1130,6 +1131,8 @@
             const email = document.getElementById('adminEmail').value;
             const password = document.getElementById('adminPassword').value;
             
+            // **AVISO: LAS CREDENCIALES SIGUEN EXPUESTAS AQUÍ EN JAVASCRIPT**
+            // PARA UN SITIO REAL, LA AUTENTICACIÓN DEBE HACERSE EN EL SERVIDOR.
             if (email === 'robbie.asistente@gmail.com' && password === 'AsistenteRobbie2025') {
                 isAdmin = true;
                 document.body.classList.add('admin-mode');
