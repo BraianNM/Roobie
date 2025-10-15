@@ -993,12 +993,15 @@
 
     <script>
         // =============================================
-        // CONFIGURACIÓN NPONINT.IO - AUTOMÁTICO
+        // CONFIGURACIÓN JSONBIN.IO - AUTOMÁTICO
         // =============================================
         
-        // 🔧 REEMPLAZA ESTA URL CON LA QUE TE DÉ NPONINT.IO
-        const NPONINT_JSON_URL = 'https://api.npoint.io/d51d5853b493dd18a345';
-        
+        // 🔧 CONFIGURA ESTOS DATOS CON TUS CREDENCIALES DE JSONBIN.IO
+        const JSONBIN_BIN_ID = '68f00c90ae596e708f15ee3f'; // Tu Bin ID
+        const JSONBIN_API_KEY = '$2a$10$MuCwSB7H11OwcpObaUQ3cebJazACUgkRmcxWjwxEwS.KRpUllh69K'; 
+        const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+        const JSONBIN_LATEST = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`;
+
         // =============================================
         // FUNCIONES PRINCIPALES
         // =============================================
@@ -1006,22 +1009,24 @@
         // Función para cargar testimonios automáticamente
         async function loadTestimonials() {
             try {
-                console.log('🔄 Cargando testimonios...');
+                console.log('🔄 Cargando testimonios desde JSONBin...');
                 const testimonialsGrid = document.getElementById('testimonialsGrid');
                 
-                const response = await fetch(NPONINT_JSON_URL);
+                const response = await fetch(JSONBIN_LATEST, {
+                    headers: {
+                        'X-Master-Key': JSONBIN_API_KEY
+                    }
+                });
                 
                 if (!response.ok) {
                     throw new Error(`Error HTTP: ${response.status}`);
                 }
                 
-                const testimonials = await response.json();
+                const data = await response.json();
+                const testimonials = data.record.testimonios || [];
                 
-                // Verificar si es un array
-                const testimonialsArray = Array.isArray(testimonials) ? testimonials : [];
-                
-                console.log(`✅ Se cargaron ${testimonialsArray.length} testimonios`);
-                displayTestimonials(testimonialsArray);
+                console.log(`✅ Se cargaron ${testimonials.length} testimonios`);
+                displayTestimonials(testimonials);
                 
             } catch (error) {
                 console.error('❌ Error cargando testimonios:', error);
@@ -1080,6 +1085,21 @@
                 submitBtn.disabled = true;
                 
                 try {
+                    // 1. Obtener testimonios actuales
+                    const getResponse = await fetch(JSONBIN_LATEST, {
+                        headers: {
+                            'X-Master-Key': JSONBIN_API_KEY
+                        }
+                    });
+                    
+                    if (!getResponse.ok) {
+                        throw new Error('Error obteniendo datos actuales');
+                    }
+                    
+                    const currentData = await getResponse.json();
+                    const currentTestimonials = currentData.record.testimonios || [];
+                    
+                    // 2. Crear nuevo testimonio
                     const newTestimonial = {
                         nombre: name,
                         testimonio: testimonial,
@@ -1087,18 +1107,22 @@
                         inicial: name.charAt(0).toUpperCase()
                     };
                     
-                    console.log('📤 Enviando testimonio:', newTestimonial);
+                    // 3. Agregar al principio del array
+                    const updatedTestimonials = [newTestimonial, ...currentTestimonials];
                     
-                    // Enviar a npoint.io - MÉTODO AUTOMÁTICO
-                    const response = await fetch(NPONINT_JSON_URL, {
-                        method: 'POST',
+                    // 4. Actualizar en JSONBin
+                    const updateResponse = await fetch(JSONBIN_URL, {
+                        method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
+                            'X-Master-Key': JSONBIN_API_KEY
                         },
-                        body: JSON.stringify(newTestimonial)
+                        body: JSON.stringify({
+                            testimonios: updatedTestimonials
+                        })
                     });
                     
-                    if (response.ok) {
+                    if (updateResponse.ok) {
                         console.log('✅ Testimonio enviado exitosamente');
                         
                         // Mostrar mensaje de éxito
@@ -1113,7 +1137,7 @@
                         }, 1000);
                         
                     } else {
-                        throw new Error('Error en la respuesta del servidor');
+                        throw new Error('Error actualizando en JSONBin');
                     }
                     
                 } catch (error) {
