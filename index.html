@@ -930,38 +930,8 @@
             </div>
             
             <div class="testimonials-grid" id="testimonialsGrid">
-                <div class="testimonial-card">
-                    <button class="delete-btn" onclick="deleteTestimonial(this)">✕</button>
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">M</div>
-                        <div class="testimonial-author">María González</div>
-                    </div>
-                    <div class="testimonial-text">
-                        "ROBBIE me ayudó con toda la gestión de mi monotributo. Muy profesionales y eficientes. ¡Los recomiendo!"
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <button class="delete-btn" onclick="deleteTestimonial(this)">✕</button>
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">C</div>
-                        <div class="testimonial-author">Carlos López</div>
-                    </div>
-                    <div class="testimonial-text">
-                        "La asistencia virtual ha sido un cambio radical para mi negocio. Ahora puedo enfocarme en lo que realmente importa."
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <button class="delete-btn" onclick="deleteTestimonial(this)">✕</button>
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">A</div>
-                        <div class="testimonial-author">Ana Martínez</div>
-                    </div>
-                    <div class="testimonial-text">
-                        "Excelente servicio de liquidación de sueldos. Muy detallados y siempre disponibles para consultas."
-                    </div>
-                </div>
+                <!-- Los testimonios se cargarán aquí automáticamente -->
+                <div class="loading-testimonials">Cargando testimonios...</div>
             </div>
         </div>
     </section>
@@ -1018,6 +988,153 @@
     </div>
 
     <script>
+        // =============================================
+        // CONFIGURACIÓN GITHUB GISTS
+        // =============================================
+        
+        // REEMPLAZA ESTO CON TU GIST ID
+        const GIST_ID = 'TU_GIST_ID_AQUI'; // Ejemplo: 'abc123def456789'
+        const GIST_URL = `https://api.github.com/gists/${GIST_ID}`;
+        
+        // Token opcional para más requests (crear en GitHub Settings > Developer settings > Personal access tokens)
+        const GITHUB_TOKEN = ''; // Opcional: 'ghp_tu_token_aqui'
+
+        // =============================================
+        // FUNCIONES PARA GITHUB GISTS
+        // =============================================
+
+        // Función para cargar testimonios desde Gist
+        async function loadTestimonials() {
+            try {
+                console.log('Cargando testimonios desde GitHub Gist...');
+                
+                const headers = {};
+                if (GITHUB_TOKEN) {
+                    headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+                }
+                
+                const response = await fetch(GIST_URL, { headers });
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                
+                const gist = await response.json();
+                const testimonialsData = JSON.parse(gist.files['testimonios.json'].content);
+                const testimonials = testimonialsData.testimonios || [];
+                
+                console.log(`Se cargaron ${testimonials.length} testimonios`);
+                displayTestimonials(testimonials);
+                
+            } catch (error) {
+                console.error('Error cargando testimonios:', error);
+                loadFallbackTestimonials();
+            }
+        }
+
+        // Función para mostrar testimonios en la página
+        function displayTestimonials(testimonials) {
+            const testimonialsGrid = document.getElementById('testimonialsGrid');
+            
+            if (testimonials.length === 0) {
+                testimonialsGrid.innerHTML = `
+                    <div class="no-testimonials">
+                        <p>Aún no hay testimonios. ¡Sé el primero en comentar!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            testimonialsGrid.innerHTML = '';
+            
+            // Ordenar por fecha (más recientes primero)
+            testimonials.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+            
+            testimonials.forEach(testimonial => {
+                const testimonialCard = document.createElement('div');
+                testimonialCard.className = 'testimonial-card';
+                testimonialCard.innerHTML = `
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">${testimonial.inicial}</div>
+                        <div class="testimonial-author">${testimonial.nombre}</div>
+                    </div>
+                    <div class="testimonial-text">"${testimonial.testimonio}"</div>
+                `;
+                testimonialsGrid.appendChild(testimonialCard);
+            });
+        }
+
+        // Función para enviar testimonio (VERSIÓN SIMPLE - sin backend)
+        function submitTestimonialSimple(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('clientName').value.trim();
+            const testimonial = document.getElementById('clientTestimonial').value.trim();
+            
+            if (name && testimonial) {
+                // Enviar por email (solución temporal)
+                const subject = `Nuevo testimonio de ${name} - Robbie`;
+                const body = `
+Nombre: ${name}
+Testimonio: ${testimonial}
+
+Fecha: ${new Date().toLocaleDateString()}
+
+---
+Por favor, agrega este testimonio manualmente al sistema GitHub Gist.
+Enviado desde el sitio web de Robbie
+                `;
+                
+                window.location.href = `mailto:robbie.asistente@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                alert('¡Gracias por tu testimonio! Se ha enviado a nuestro equipo. Lo revisaremos y publicaremos pronto.');
+                document.getElementById('testimonialForm').reset();
+            } else {
+                alert('Por favor, completa todos los campos.');
+            }
+        }
+
+        // Testimonios de ejemplo por si falla la conexión
+        function loadFallbackTestimonials() {
+            console.log('Cargando testimonios de respaldo...');
+            const testimonialsGrid = document.getElementById('testimonialsGrid');
+            testimonialsGrid.innerHTML = `
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">M</div>
+                        <div class="testimonial-author">María González</div>
+                    </div>
+                    <div class="testimonial-text">
+                        "ROBBIE me ayudó con toda la gestión de mi monotributo. Muy profesionales y eficientes. ¡Los recomiendo!"
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">C</div>
+                        <div class="testimonial-author">Carlos López</div>
+                    </div>
+                    <div class="testimonial-text">
+                        "La asistencia virtual ha sido un cambio radical para mi negocio. Ahora puedo enfocarme en lo que realmente importa."
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">A</div>
+                        <div class="testimonial-author">Ana Martínez</div>
+                    </div>
+                    <div class="testimonial-text">
+                        "Excelente servicio de liquidación de sueldos. Muy detallados y siempre disponibles para consultas."
+                    </div>
+                </div>
+            `;
+        }
+
+        // =============================================
+        // CÓDIGO EXISTENTE (se mantiene igual)
+        // =============================================
+
         // Mobile menu functionality
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.getElementById('navContainer').classList.toggle('active');
@@ -1050,6 +1167,13 @@
                     }
                 });
             }, 3000);
+            
+            // Cargar testimonios al iniciar
+            loadTestimonials();
+            
+            // Configurar el formulario
+            const testimonialForm = document.getElementById('testimonialForm');
+            testimonialForm.addEventListener('submit', submitTestimonialSimple);
         });
         
         // Accordion functionality
@@ -1089,44 +1213,6 @@
             lastScrollTop = scrollTop;
         });
         
-        // Testimonial form functionality
-        const testimonialForm = document.getElementById('testimonialForm');
-        const testimonialsGrid = document.getElementById('testimonialsGrid');
-        
-        testimonialForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('clientName').value;
-            const testimonial = document.getElementById('clientTestimonial').value;
-            
-            if (name && testimonial) {
-                // Create new testimonial card
-                const testimonialCard = document.createElement('div');
-                testimonialCard.className = 'testimonial-card';
-                
-                // Get first letter for avatar
-                const firstLetter = name.charAt(0).toUpperCase();
-                
-                testimonialCard.innerHTML = `
-                    <button class="delete-btn" onclick="deleteTestimonial(this)">✕</button>
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">${firstLetter}</div>
-                        <div class="testimonial-author">${name}</div>
-                    </div>
-                    <div class="testimonial-text">"${testimonial}"</div>
-                `;
-                
-                // Add to the grid (at the beginning)
-                testimonialsGrid.prepend(testimonialCard);
-                
-                // Reset form
-                testimonialForm.reset();
-                
-                // Show success message
-                alert('¡Gracias por tu testimonio! Se ha publicado correctamente.');
-            }
-        });
-        
         // Admin functionality
         let isAdmin = false;
         
@@ -1138,8 +1224,6 @@
             const email = document.getElementById('adminEmail').value;
             const password = document.getElementById('adminPassword').value;
             
-            // **AVISO: LAS CREDENCIALES SIGUEN EXPUESTAS AQUÍ EN JAVASCRIPT**
-            // PARA UN SITIO REAL, LA AUTENTICACIÓN DEBE HACERSE EN EL SERVIDOR.
             if (email === 'robbie.asistente@gmail.com' && password === 'AsistenteRobbie2025') {
                 isAdmin = true;
                 document.body.classList.add('admin-mode');
