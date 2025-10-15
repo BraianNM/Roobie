@@ -5,12 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROBBIE - Asistencia Virtual y Gestión</title>
     
+    <!-- ==================== -->
+    <!-- META TAGS SEO -->
+    <!-- ==================== -->
+    <meta name="description" content="ROBBIE - Asistencia virtual, gestión de monotributo, liquidación de sueldos y servicios contables. Optimiza tu negocio con nuestros servicios integrales en Argentina.">
+    <meta name="keywords" content="asistencia virtual, monotributo, liquidación de sueldos, contabilidad, gestión empresarial, Robbie, servicios contables, Argentina, San Juan, gestión de negocios">
+    <meta name="author" content="ROBBIE">
+    <meta name="robots" content="index, follow">
+    <meta name="geo.region" content="AR">
+    <meta name="geo.placename" content="Argentina">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ROBBIE - Asistencia Virtual y Gestión">
+    <meta property="og:description" content="Servicios de asistencia virtual, gestión de monotributo y contabilidad para emprendedores y pymes en Argentina">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://braiannm.github.io/Roebie">
+    
+    <!-- Google Search Console - REEMPLAZA CON TU CÓDIGO -->
+    <!-- <meta name="google-site-verification" content="TU_CODIGO_DE_VERIFICACION"> -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gidole&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Menbere&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- ==================== -->
+    <!-- SCHEMA MARKUP SEO -->
+    <!-- ==================== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ROBBIE",
+      "description": "Servicios de asistencia virtual y gestión contable para emprendedores y pymes",
+      "url": "https://braiannm.github.io/Roebie",
+      "telephone": "+5492645601518",
+      "email": "robbie.asistente@gmail.com",
+      "areaServed": "Argentina",
+      "serviceType": [
+        "Asistencia virtual",
+        "Gestión de monotributo", 
+        "Liquidación de sueldos",
+        "Contabilidad",
+        "Gestión de ingresos brutos",
+        "Sociedades"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AR"
+      },
+      "openingHours": "Mo-Fr 09:00-18:00",
+      "priceRange": "$$"
+    }
+    </script>
 
     <style>
         /* Fuentes personalizadas originales (se mantienen) */
@@ -960,6 +1009,22 @@
         </div>
     </section>
 
+    <!-- ==================== -->
+    <!-- SECCIÓN LOCAL SEO -->
+    <!-- ==================== -->
+    <section class="local-seo" style="padding: 60px 5%; background-color: white; border-top: 1px solid var(--medium-gray);">
+        <div class="section-title">
+            <h2 style="font-family: 'Gidole', sans-serif;">ROBBIE - Asistencia Virtual en Argentina</h2>
+            <p>Servicios de gestión contable y administrativa para emprendedores y pymes en toda Argentina</p>
+        </div>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p style="margin-bottom: 15px; font-size: 16px;"><strong>📍 Zonas de cobertura:</strong> San Juan, Mendoza, Buenos Aires y todo el país</p>
+            <p style="margin-bottom: 15px; font-size: 16px;"><strong>💼 Especialistas en:</strong> Monotributo, Ingresos Brutos, Sociedades, Liquidación de Sueldos, Asistencia Virtual</p>
+            <p style="margin-bottom: 15px; font-size: 16px;"><strong>📞 Contacto directo:</strong> +54 9 264 560-1518 | robbie.asistente@gmail.com</p>
+            <p style="font-size: 14px; color: var(--text-color);">Servicios profesionales de contabilidad y gestión empresarial para optimizar tu negocio</p>
+        </div>
+    </section>
+
     <footer>
         <div class="footer-content">
             <div class="footer-column">
@@ -996,9 +1061,8 @@
         // CONFIGURACIÓN JSONBIN.IO - AUTOMÁTICO
         // =============================================
         
-        // 🔧 CONFIGURA ESTOS DATOS CON TUS CREDENCIALES DE JSONBIN.IO
-        const JSONBIN_BIN_ID = '68f00c90ae596e708f15ee3f'; // Tu Bin ID
-        const JSONBIN_API_KEY = '$2a$10$MuCwSB7H11OwcpObaUQ3cebJazACUgkRmcxWjwxEwS.KRpUllh69K'; 
+        const JSONBIN_BIN_ID = '68f00c90ae596e708f15ee3f';
+        const JSONBIN_API_KEY = '$2a$10$MuCwSB7H11Owcp0baU03cebJaazACUgKmcxWjwxEw5.KRpU1th69K';
         const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
         const JSONBIN_LATEST = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`;
 
@@ -1006,7 +1070,6 @@
         // FUNCIONES PRINCIPALES
         // =============================================
 
-        // Función para cargar testimonios automáticamente
         async function loadTestimonials() {
             try {
                 console.log('🔄 Cargando testimonios desde JSONBin...');
@@ -1034,7 +1097,6 @@
             }
         }
 
-        // Función para mostrar testimonios en la página
         function displayTestimonials(testimonials) {
             const testimonialsGrid = document.getElementById('testimonialsGrid');
             
@@ -1049,7 +1111,6 @@
             
             testimonialsGrid.innerHTML = '';
             
-            // Ordenar por fecha (más recientes primero)
             testimonials.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
             
             testimonials.forEach(testimonial => {
@@ -1069,7 +1130,6 @@
             });
         }
 
-        // Función para enviar testimonio AUTOMÁTICAMENTE
         async function submitTestimonialAuto(e) {
             e.preventDefault();
             
@@ -1079,13 +1139,11 @@
             const btnText = document.getElementById('btnText');
             
             if (name && testimonial) {
-                // Mostrar loading
                 const originalText = btnText.textContent;
                 btnText.innerHTML = '<div class="loading"></div>Enviando...';
                 submitBtn.disabled = true;
                 
                 try {
-                    // 1. Obtener testimonios actuales
                     const getResponse = await fetch(JSONBIN_LATEST, {
                         headers: {
                             'X-Master-Key': JSONBIN_API_KEY
@@ -1099,7 +1157,6 @@
                     const currentData = await getResponse.json();
                     const currentTestimonials = currentData.record.testimonios || [];
                     
-                    // 2. Crear nuevo testimonio
                     const newTestimonial = {
                         nombre: name,
                         testimonio: testimonial,
@@ -1107,10 +1164,8 @@
                         inicial: name.charAt(0).toUpperCase()
                     };
                     
-                    // 3. Agregar al principio del array
                     const updatedTestimonials = [newTestimonial, ...currentTestimonials];
                     
-                    // 4. Actualizar en JSONBin
                     const updateResponse = await fetch(JSONBIN_URL, {
                         method: 'PUT',
                         headers: {
@@ -1124,18 +1179,11 @@
                     
                     if (updateResponse.ok) {
                         console.log('✅ Testimonio enviado exitosamente');
-                        
-                        // Mostrar mensaje de éxito
                         alert('🎉 ¡Gracias! Tu testimonio se ha publicado automáticamente y ya es visible para todos.');
-                        
-                        // Limpiar formulario
                         document.getElementById('testimonialForm').reset();
-                        
-                        // Recargar testimonios después de 1 segundo
                         setTimeout(() => {
                             loadTestimonials();
                         }, 1000);
-                        
                     } else {
                         throw new Error('Error actualizando en JSONBin');
                     }
@@ -1144,7 +1192,6 @@
                     console.error('❌ Error enviando testimonio:', error);
                     alert('⚠️ Error temporal al enviar. Por favor, intenta nuevamente en unos momentos.');
                 } finally {
-                    // Restaurar botón
                     btnText.textContent = originalText;
                     submitBtn.disabled = false;
                 }
@@ -1153,7 +1200,6 @@
             }
         }
 
-        // Testimonios de ejemplo por si falla la conexión
         function loadFallbackTestimonials() {
             console.log('🔄 Cargando testimonios de respaldo...');
             const testimonialsGrid = document.getElementById('testimonialsGrid');
@@ -1181,19 +1227,16 @@
         }
 
         // =============================================
-        // CÓDIGO EXISTENTE (se mantiene igual)
+        // CÓDIGO EXISTENTE
         // =============================================
 
-        // Mobile menu functionality
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.getElementById('navContainer').classList.toggle('active');
         });
         
-        // Robbie character animation
         document.addEventListener('DOMContentLoaded', function() {
             const robbies = document.querySelectorAll('.robbie-character');
             
-            // Make Robbie characters move slightly on mouse move
             document.addEventListener('mousemove', function(e) {
                 const mouseX = e.clientX / window.innerWidth;
                 const mouseY = e.clientY / window.innerHeight;
@@ -1206,7 +1249,6 @@
                 });
             });
             
-            // Make Robbie characters appear/disappear randomly
             setInterval(function() {
                 robbies.forEach(robbie => {
                     if (Math.random() > 0.7) {
@@ -1217,34 +1259,28 @@
                 });
             }, 3000);
             
-            // Cargar testimonios al iniciar
             loadTestimonials();
             
-            // Configurar el formulario para envío AUTOMÁTICO
             const testimonialForm = document.getElementById('testimonialForm');
             testimonialForm.addEventListener('submit', submitTestimonialAuto);
         });
         
-        // Accordion functionality
         const accordionItems = document.querySelectorAll('.accordion-item');
         
         accordionItems.forEach(item => {
             const header = item.querySelector('.accordion-header');
             
             header.addEventListener('click', () => {
-                // Close all other accordion items
                 accordionItems.forEach(otherItem => {
                     if (otherItem !== item) {
                         otherItem.classList.remove('active');
                     }
                 });
                 
-                // Toggle current item
                 item.classList.toggle('active');
             });
         });
         
-        // Hide header on scroll down, show on scroll up
         let lastScrollTop = 0;
         const header = document.getElementById('mainHeader');
         
@@ -1252,17 +1288,14 @@
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
             if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrolling down
                 header.classList.add('hidden');
             } else {
-                // Scrolling up
                 header.classList.remove('hidden');
             }
             
             lastScrollTop = scrollTop;
         });
         
-        // Admin functionality
         let isAdmin = false;
         
         function toggleAdminLogin() {
