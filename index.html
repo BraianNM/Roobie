@@ -4,12 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROBBIE - Asistencia Virtual y Gestión</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Menbere&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gidole&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Eliminamos las @font-face antiguas que usaban URLs de terceros */
+        /* Fuentes personalizadas originales (se mantienen) */
+        @font-face {
+            font-family: 'Madelaine';
+            src: url('https://fonts.cdnfonts.com/s/84925/MADELEINE.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Absortile';
+            src: url('https://fonts.cdnfonts.com/s/84925/Absorrilte.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
         
         :root {
             --primary-color: #3CB371;
@@ -63,12 +78,13 @@
             align-items: center;
         }
         
-        /* Aplicamos 'Great Vibes' para el nombre "ROBBIE" y la inicial del logo */
+        /* CAMBIO 1: Aplicar 'Alumni Sans SC' a "ROBBIE" en el logo */
         .logo h1 {
             color: var(--primary-color);
             font-size: 32px;
             margin-left: 10px;
-            font-family: 'Great Vibes', cursive; /* FUENTE 1: Robbie */
+            font-family: 'Alumni Sans SC', sans-serif; /* Fuente cambiada */
+            font-weight: 700; /* Se ajusta el peso de la fuente */
         }
         
         .logo-icon {
@@ -81,7 +97,8 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-family: 'Great Vibes', cursive; /* FUENTE 1: Robbie */
+            font-family: 'Alumni Sans SC', sans-serif; /* Fuente cambiada */
+            font-size: 20px; /* Tamaño para que la R se vea bien */
         }
         
         .contact-info {
@@ -130,7 +147,6 @@
             position: relative;
         }
         
-        /* La navegación no requiere un estilo tan rudo, mantenemos Montserrat o la fuente Display para un toque corporativo */
         .nav-link {
             display: block;
             padding: 15px 20px;
@@ -138,8 +154,7 @@
             text-decoration: none;
             font-weight: 500;
             transition: background-color 0.3s;
-            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
-            font-size: 1.2em;
+            font-family: 'Absortile', cursive;
         }
         
         .nav-link:hover {
@@ -160,7 +175,7 @@
         .hero h2 {
             font-size: 42px;
             margin-bottom: 20px;
-            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo para titular de impacto */
+            font-family: 'Absortile', cursive;
         }
         
         .hero p {
@@ -230,7 +245,7 @@
             font-size: 32px;
             color: var(--title-color);
             margin-bottom: 15px;
-            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
+            font-family: 'Absortile', cursive;
         }
         
         .section-title p {
@@ -252,7 +267,7 @@
             border: 1px solid var(--medium-gray);
         }
         
-        /* Aplicamos 'Bebas Neue' al menú desplegable principal */
+        /* CAMBIO 2: Aplicar 'Menbere' a los títulos de los acordeones */
         .accordion-header {
             background-color: white;
             color: var(--title-color);
@@ -261,8 +276,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
-            font-size: 1.4em; /* Aumentamos un poco el tamaño por el estilo de la fuente */
+            font-family: 'Menbere', sans-serif; /* Fuente cambiada */
+            font-size: 18px;
         }
         
         .accordion-header:hover {
@@ -334,7 +349,7 @@
             font-size: 32px;
             color: var(--title-color);
             margin-bottom: 20px;
-            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
+            font-family: 'Absortile', cursive;
         }
         
         .va-content p {
@@ -370,7 +385,7 @@
         .advantages h3 {
             color: var(--title-color);
             margin-bottom: 15px;
-            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
+            font-family: 'Absortile', cursive;
         }
         
         /* Footer */
@@ -391,7 +406,7 @@
             color: white;
             margin-bottom: 20px;
             font-size: 18px;
-            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
+            font-family: 'Absortile', cursive;
         }
         
         .footer-links {
@@ -502,7 +517,7 @@
         .testimonial-form h3 {
             color: var(--title-color);
             margin-bottom: 20px;
-            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
+            font-family: 'Absortile', cursive;
         }
         
         .form-group {
@@ -632,7 +647,7 @@
         .login-form h3 {
             margin-bottom: 20px;
             color: var(--title-color);
-            font-family: 'Bebas Neue', sans-serif; /* FUENTE 2: Monotributo */
+            font-family: 'Absortile', cursive;
         }
         
         @media (max-width: 768px) {
@@ -684,27 +699,36 @@
                 display: none;
             }
         }
+        
+        /* CAMBIO 3: Aplicar 'Alumni Sans SC' a "Robbie" en los caracteres flotantes */
+        .robbie-character p {
+            font-size: 12px;
+            margin-top: 5px;
+            color: var(--text-color);
+            font-family: 'Alumni Sans SC', sans-serif; /* Fuente cambiada */
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
     <div class="robbie-character robbie-1">
         <img src="https://i.ibb.co/Z6tMZMRF/IMG-20251014-WA0025.jpg" alt="Robbie">
-        <p>Te ayudo con tus trámites</p>
-    </div>
+        <p>Robbie</p> 
+        </div>
     
     <div class="robbie-character robbie-2">
         <img src="https://i.ibb.co/Z1fJhzDs/IMG-20251014-WA0023.jpg" alt="Robbie">
-        <p>¡Estoy para ayudarte!</p>
+        <p>Robbie</p> 
     </div>
     
     <div class="robbie-character robbie-3">
         <img src="https://i.ibb.co/k20nP9nB/IMG-20251014-WA0024.jpg" alt="Robbie">
-        <p>Tu opinión es importante</p>
+        <p>Robbie</p>
     </div>
     
     <div class="robbie-character robbie-4">
         <img src="https://i.ibb.co/WNfrmwMs/IMG-20251014-WA0021.jpg" alt="Robbie">
-        <p>Recomienda nuestros contactos</p>
+        <p>Robbie</p>
     </div>
 
     <header id="mainHeader">
@@ -872,7 +896,7 @@
 
     <section class="testimonials" id="testimonials">
         <div class="section-title">
-            <h2>Nuestros Clientes Recomiendan ROBBIE</h2>
+            <h2 style="font-family: 'Gidole', sans-serif;">Nuestros Clientes Recomiendan ROBBIE</h2>
             <p>Descubre lo que nuestros clientes dicen sobre nuestros servicios</p>
         </div>
         
